@@ -1,0 +1,64 @@
+//Layout for navigation.
+nav {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: bold;
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    background: #208;
+    border-bottom: 4px solid #208;
+
+
+    //Give links in the list the illusion of being buttons.
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin: 0;
+            text-align: center;
+            border-left: 4px solid #208;
+
+            a {
+                display: block;
+                text-decoration: none;
+                color: #f1f1f1;
+                padding: 15px 30px;
+                margin: 0;
+            }
+        }
+
+        li:hover a, li a.current {
+            color: #208;
+            background: #f1f1f1;
+            border: 2px solid #f1f1f1;
+        }
+    }
+}
+
+//Make a navigation bar on larger screen.
+@media only screen and (min-width: 750px) {
+    nav {
+        border-top: 5px solid #208;
+        border-bottom: 10px solid #f1f1f1;
+        ul {
+            li {
+                float: left;
+            }
+
+            a {
+                padding: 5%;
+                min-width: max-content;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+    }
+}
+
+//Remove float after nav-bar.
+nav::after {
+    content: "";
+    clear: both;
+    display: table;
+}

@@ -1,0 +1,26 @@
+//Import font.
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap');
+
+//General settings such as border-box etc.
+html {
+    /*62.5% of 16px => 10px*/
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+//Background color.
+body {
+    background: #f1f1f1;
+    margin: 0;
+}
+
+//Making sure all headers on all pages always have the correct font.
+h1 {
+    font-family: 'Playwrite GB S', 'Space Mono', monospace;
+}
+
+h2, h3 {
+    font-family: 'Space Mono', monospace;
+}

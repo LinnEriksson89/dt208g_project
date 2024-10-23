@@ -1,0 +1,25 @@
+footer {
+    background: #208;
+    padding: 2%;
+    margin: 0;
+    font-size: 1.6em;
+
+    p {
+        width: 100%;
+        text-align: center;
+        color: #f1f1f1;
+
+        a {
+            color: #f1f1f1;
+        }
+    }
+
+    p.right {
+        text-align: right;
+        color: #f1f1f1;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
