@@ -1,0 +1,15 @@
+.pagination {
+    display: inline-block;
+}
+
+.page-item {
+    display: inline;
+}
+
+.page-item.active .page-link,
+.page-item.active .page-link:focus,
+.page-item.active .page-link:hover {
+
+    background-color: #208;
+    color: #f1f1f1;
+}
