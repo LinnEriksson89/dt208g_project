@@ -1,0 +1,148 @@
+//Use grid to display the search in a better way.
+#searchbar {
+    display: grid;
+    grid-template-areas:
+        'label1 label2'
+        'search subject';
+
+    gap: 5px 20px;
+
+    #searchlabel {
+        grid-area: label1;
+    }
+
+    input[type=search] {
+        grid-area: search;
+    }
+
+    #subjectlabel {
+        grid-area: label2;
+    }
+
+    select {
+        grid-area: subject;
+    }
+}
+
+input[type=search]:active,
+input[type=search]:focus-within {
+    background-color: #d9ccff;
+}
+
+table {
+    max-width: 99%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #f1f1f1;
+
+    tr {
+        height: 1em;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9ccff;
+    }
+
+    tr:hover {
+        background-color: #c6b3ff;
+    }
+
+    th {
+        border-bottom: 2px solid #208;
+        padding-right: 20px;
+        text-align: left;
+    }
+
+    td {
+        padding-right: 30px;
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    td:hover {
+        overflow: visible;
+        max-width: 100%;
+    }
+
+    th[sortable] span {
+        content: "";
+        display: block;
+        background-size: 16px;
+        width: 16px;
+        height: 16px;
+        float: right;
+        margin-right: -10px;
+        margin-top: 4px;
+    }
+
+    th[sortable].desc span,
+    th[sortable].asc span {
+        content: "";
+        display: block;
+        float: right;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAmxJREFUeAHtmksrRVEUx72fH8CIGQNJkpGUUmakDEiZSJRIZsRQmCkTJRmZmJgQE0kpX0D5DJKJgff7v+ru2u3O3vvc67TOvsdatdrnnP1Y///v7HvvubdbUiIhBISAEBACQkAICAEhIAQ4CXSh2DnyDfmCPEG2Iv9F9MPlM/LHyAecdyMzHYNwR3fdNK/OH9HXl1UCozD24TCvILxizEDWIEzA0FcM8woCgRrJCoS5PIwrANQSMAJX1LEI9bqpQo4JYNFFKRSvIgsxHDVnqZgIkPnNBM0rIGtYk9YOOsqgbgepRCfdbmFtqhFkVEDVPjJp0+Z6e6hRHhqBKgg6ZDCvYBygVmUoEGoh5JTRvIJwhJo1aUOoh4CLPMyvxxi7EWOMgnCGsXXI1GIXlZUYX7ucU+kbR8NW8lh3O7cue0Pk32MKndfUxQFAwxdirk3fHappAnc0oqDPzDfGTBrCfHP04dM4oTV8cxr0SVzH9FF07xD3ib6xCDE+M+aUcVygtWzzbtGX2rPBrEUYfecfQkaFzYi6HjVnGBdtL7epqAlc1+jRdAap74RrnPc4BCijttY2tRcdN0g17w7HqZrXhdJTYAuS3hd8z+vKgK3V1zWPae0mZDMykadBn1hTQBLnZNwVrJpSe/NwEeDsEwCctEOsJTsgxLvCqUl2ACftEGvJDgjxrnBqkh3ASTvEWrIDQrwrnJpkB3DSDrGW7IAQ7wqnJtkBnLRztejXXVu4+mxz/nQ9jR1w5VB86ejLTFcnnDwhzV+F6T+CHZlx6THSjn76eyyBIOPHyDakhBAQAkJACAgBISAEhIAQYCLwC8JxpAmsEGt6AAAAAElFTkSuQmCC") no-repeat;
+        background-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-top: 4px;
+    }
+
+    th[sortable].desc span {
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+    }
+
+    td.center {
+        text-align: center;
+    }
+
+    a,
+    a:visited {
+        color: #208;
+    }
+
+    a:hover, a:active {
+        text-decoration: overline underline;
+    }
+
+    button {
+        background-color: #208;
+        color: #f1f1f1;
+        padding: 4px 16px;
+        border: 2px solid #f1f1f1;
+        border-radius: 10px;
+    }
+
+    button:active, button:hover, button:focus {
+        background-color: #f1f1f1;
+        color: #208;
+        border: 2px solid #208;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    table {
+        .secondary {
+            display: none;
+        }
+
+        td {
+            max-width: 110px;
+            padding-right: 0;
+        }
+
+        th {
+            max-width: 100px;
+            padding-right: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            overflow: visible;
+        }
+    }
+}

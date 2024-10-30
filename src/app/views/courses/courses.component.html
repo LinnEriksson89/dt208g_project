@@ -1,1 +1,40 @@
-<p>courses works!</p>
+<h2>Tillgängliga kurser</h2>
+<p>Nedan visas alla kurser som är tillgängliga för tillfället. Kurserna kan sorteras genom att klicka på respektive
+    rubrik.</p>
+
+<div id="searchbar">
+    <label for="search" id="searchlabel">Sök på kurskod eller kursnamn:</label><br>
+    <input type="search" name="search" id="search" [(ngModel)]="filter" placeholder="Sök kurser">
+    <label for="subject" id="subjectlabel">Visa kurser enligt ämne:</label><br>
+    <select name="subject" id="subject" ngModel>
+        <option *ngFor="let subject of subjectsList" [ngValue]="subject" [(ngModel)]="subjectFilter">{{ subject }}
+        </option>
+    </select>
+</div>
+
+<mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)">
+</mat-paginator>
+
+<table>
+    <thead>
+        <tr>
+            <th>Lägg till</th>
+            <th scope="col" sortable="courseCode" (sort)="onSort($event)"><span></span>Kurskod</th>
+            <th scope="col" sortable="courseName" (sort)="onSort($event)"><span></span>Kursnamn</th>
+            <th scope="col" sortable="points" (sort)="onSort($event)"><span></span>Poäng</th>
+            <th scope="col" sortable="subject" (sort)="onSort($event)" class="secondary"><span></span>Ämne</th>
+            <th scope="col" sortable="progression" (sort)="onSort($event)"><span></span>Progression</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courseList | course:filter | subjects:subjectFilter">
+            <td class="center"><button>Lägg till</button></td>
+            <td><a href="{{ course.syllabus }}">{{ course.courseCode | uppercase }}</a></td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.points }}</td>
+            <td class="secondary">{{ course.subject }}</td>
+            <td>{{ course.progression }}</td>
+        </tr>
+    </tbody>
+</table>
