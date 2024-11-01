@@ -6,11 +6,14 @@
     <label for="search" id="searchlabel">Sök på kurskod eller kursnamn:</label><br>
     <input type="search" name="search" id="search" [(ngModel)]="filter" placeholder="Sök kurser">
     <label for="subject" id="subjectlabel">Visa kurser enligt ämne:</label><br>
-    <select name="subject" id="subject" ngModel>
-        <option *ngFor="let subject of subjectsList" [ngValue]="subject" [(ngModel)]="subjectFilter">{{ subject }}
+    <select name="subject" id="subject" [(ngModel)]="subjectFilter">
+        <option value="all">Alla kurser</option>
+        <option *ngFor="let subject of subjectsList" [ngValue]="subject">{{ subject }}
         </option>
     </select>
 </div>
+
+<p>Just nu visas {{ (this.courseList | course:filter | subjects:subjectFilter).length }} av {{ coursesTotal }} kurser.</p>
 
 <table>
     <thead>

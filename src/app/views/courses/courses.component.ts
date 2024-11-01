@@ -22,6 +22,8 @@ export class CoursesComponent {
     subjectsList: string[] = [];
     filter: string = "";
     subjectFilter: string = "";
+    coursesTotal: number = 0;
+    filteredTotal: number = 0;
 
     @ViewChildren(SortingDirective)
     headers!: QueryList<SortingDirective>;
@@ -33,6 +35,7 @@ export class CoursesComponent {
         this.courseService.getCourses().subscribe(data => {
             this.originalCourseList = data;
             this.courseList = this.originalCourseList;
+            this.coursesTotal = this.courseList.length;
         })
 
         this.subjectsList = this.subjectsService.getSubjects();

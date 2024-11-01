@@ -16,6 +16,10 @@ export class SubjectsPipe implements PipeTransform {
             return value;
         }
 
+        if(subjectFilter === "all") {
+            return value;
+        } 
+
         return value.filter((value: Course) => {
             const subjectFound = value.subject.toLowerCase().indexOf(subjectFilter.toLowerCase()) !== -1;
             
