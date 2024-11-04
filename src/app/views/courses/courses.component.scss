@@ -51,6 +51,9 @@ table {
         border-bottom: 2px solid #208;
         padding-right: 20px;
         text-align: left;
+        position: sticky;
+        top:0;
+        background-color: #f1f1f1;
     }
 
     td {
@@ -115,11 +118,19 @@ table {
         border-radius: 10px;
     }
 
-    button:active, button:hover, button:focus {
+    button:active, button:hover {
         background-color: #f1f1f1;
         color: #208;
         border: 2px solid #208;
     }
+}
+
+#courseAdded {
+    text-align: center;
+    position: sticky;
+    top:23px;
+    background-color: #208;
+    color: #fff;
 }
 
 @media only screen and (max-width: 750px) {

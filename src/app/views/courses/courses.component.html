@@ -15,6 +15,10 @@
 
 <p>Just nu visas {{ (this.courseList | course:filter | subjects:subjectFilter).length }} av {{ coursesTotal }} kurser.</p>
 
+<p id="courseAdded">{{courseAdded}}</p>
+
+<mat-paginator [length]="coursesTotal" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+
 <table>
     <thead>
         <tr>
@@ -29,7 +33,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let course of courseList | course:filter | subjects:subjectFilter">
-            <td class="center"><button>Lägg till</button></td>
+            <td class="center"><button (click)="addCourse(course)">Lägg till</button></td>
             <td><a href="{{ course.syllabus }}">{{ course.courseCode | uppercase }}</a></td>
             <td>{{ course.courseName }}</td>
             <td>{{ course.points }}</td>

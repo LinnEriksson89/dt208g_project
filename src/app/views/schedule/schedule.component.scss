@@ -1,0 +1,92 @@
+table {
+    max-width: 99%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #f1f1f1;
+
+    tr {
+        height: 1em;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9ccff;
+    }
+
+    tr:hover {
+        background-color: #c6b3ff;
+    }
+
+    th {
+        border-bottom: 2px solid #208;
+        padding-right: 20px;
+        text-align: left;
+        position: sticky;
+        top:0;
+        background-color: #f1f1f1;
+    }
+
+    td {
+        padding-right: 30px;
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    td:hover {
+        overflow: visible;
+        max-width: 100%;
+    }
+
+    td.center {
+        text-align: center;
+    }
+
+    a,
+    a:visited {
+        color: #208;
+    }
+
+    a:hover, a:active {
+        text-decoration: overline underline;
+    }
+
+    button {
+        background-color: #208;
+        color: #f1f1f1;
+        padding: 4px 16px;
+        border: 2px solid #f1f1f1;
+        border-radius: 10px;
+    }
+
+    button:active, button:hover {
+        background-color: #f1f1f1;
+        color: #208;
+        border: 2px solid #208;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    table {
+        .secondary {
+            display: none;
+        }
+
+        td {
+            max-width: 110px;
+            padding-right: 0;
+        }
+
+        th {
+            max-width: 100px;
+            padding-right: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            overflow: visible;
+        }
+    }
+}

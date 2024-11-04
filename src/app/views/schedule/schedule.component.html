@@ -1,1 +1,37 @@
-<p>schedule works!</p>
+<h2>Schemat</h2>
+<p>Här visas dom kurser som du har lagt till i ditt eget schema. För att lägga till kurser gå till fliken "Kurser" i
+    menyn ovan och klicka på knappen "Lägg till" för respektive kurs.</p>
+
+<div id="examselector">
+    <label for="exam" id="examlabel">Välj önskad examensnivå:</label><br>
+    <select name="exam" id="exam" [(ngModel)]="examPoints">
+        <option *ngFor="let exam of exams" [ngValue]="exam.points">{{exam.exam}}</option>
+    </select>
+</div>
+
+<p>Ditt schema innehåller just nu {{scheduledPoints}} av dom {{examPoints}} poäng som behövs för din examen. @if (scheduledPoints >= examPoints) {Hurra! 🥳}</p>
+
+<p>{{ courseRemoved }}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ta bort</th>
+            <th>Kurskod</th>
+            <th>Kursnamn</th>
+            <th>Poäng</th>
+            <th class="secondary">Ämne</th>
+            <th>Progression</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of schedule">
+            <td class="center"><button (click)="removeCourse(course)">Ta bort</button></td>
+            <td><a href="{{ course.syllabus }}">{{ course.courseCode | uppercase }}</a></td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.points }}</td>
+            <td class="secondary">{{ course.subject }}</td>
+            <td>{{ course.progression }}</td>
+        </tr>
+    </tbody>
+</table>

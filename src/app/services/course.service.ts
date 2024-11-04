@@ -8,7 +8,7 @@ import { Course } from '../models/course';
 })
 export class CourseService {
     //URL for data, or well, path but whatever.
-    url: string = "./public/data/temp.json";
+    url: string = "./public/data/courses.json";
 
     //Constructor to call httpclient
     constructor(private http: HttpClient) { }

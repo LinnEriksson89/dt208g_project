@@ -7,11 +7,13 @@ import { Course } from '../../models/course';
 import { compare, SortEvent, SortingDirective } from '../../services/sorting.directive';
 import { FormsModule } from '@angular/forms';
 import { SubjectsPipe } from '../../services/subjects.pipe';
+import { ScheduleService } from '../../services/schedule.service';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-courses',
     standalone: true,
-    imports: [CommonModule, SortingDirective, FormsModule, CoursePipe, SubjectsPipe],
+    imports: [CommonModule, SortingDirective, FormsModule, CoursePipe, SubjectsPipe, MatPaginatorModule],
     templateUrl: './courses.component.html',
     styleUrl: './courses.component.scss'
 })
@@ -19,17 +21,22 @@ export class CoursesComponent {
     //Variables
     originalCourseList: Course[] = [];
     courseList: Course[] = [];
+    paginationList: Course[] = [];
     subjectsList: string[] = [];
     filter: string = "";
     subjectFilter: string = "";
     coursesTotal: number = 0;
     filteredTotal: number = 0;
+    courseAdded: string = "";
+    pageSize: number = 10;
+    currentPage: number = 0;
+    items = this.getData(this.currentPage, this.pageSize);
 
     @ViewChildren(SortingDirective)
     headers!: QueryList<SortingDirective>;
-   
 
-    constructor(private courseService: CourseService, private subjectsService: SubjectsService) { }
+
+    constructor(private courseService: CourseService, private subjectsService: SubjectsService, private scheduleService: ScheduleService) { }
 
     ngOnInit() {
         this.courseService.getCourses().subscribe(data => {
@@ -39,6 +46,19 @@ export class CoursesComponent {
         })
 
         this.subjectsList = this.subjectsService.getSubjects();
+    }
+
+    pageChanged(event: PageEvent) {
+        this.currentPage = event.pageIndex;
+        this.items = this.getData(this.currentPage, this.pageSize);
+    }
+
+    getData(page: number, size: number) {
+        let tempList: Course[] = [];
+        let start: number = page * size;
+        let end: number = start + size;
+        tempList = this.originalCourseList.slice(start, end)
+        this.courseList = tempList;
     }
 
     onSort({ column, direction }: SortEvent) {
@@ -57,6 +77,34 @@ export class CoursesComponent {
                 const res = compare(a[column], b[column]);
                 return direction === "asc" ? res : -res;
             });
+        }
+    }
+
+    addCourse(course: Course): void {
+        let schedule = this.scheduleService.getSchedule("schedule");
+        let loop: number = 0;
+        let courseExists: boolean = false;
+
+        schedule.forEach(element => {
+            if (element.courseCode === course.courseCode) {
+                //If the course are the same, don't add it.
+                this.courseAdded = `Kursen "${course.courseName}" finns redan i ditt schema.`;
+                courseExists = true;
+                loop = schedule.length;
+            }
+
+            //Increase loop-counter.
+            loop++;
+        });
+
+        //When forEach-loop is done run this.
+        if (loop === schedule.length) {
+
+            //If course doesn't exist already, add it.            
+            if (!courseExists) {
+                this.scheduleService.addCourseToSchedule(course);
+                this.courseAdded = `Kursen "${course.courseName}" har lagts till i schemat.`;
+            }
         }
     }
 }
