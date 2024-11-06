@@ -17,4 +17,16 @@ export class CourseService {
     getCourses(): Observable<Course[]> {
         return this.http.get<Course[]>(this.url);
     }
+
+    getLocalCourses(): Course[] {
+        
+        let courses = localStorage.getItem("courses");
+        if(courses) {
+            let coursesList: Course[] = JSON.parse(courses);
+            return coursesList;
+        } else {
+            let courses: Course[] = [];
+            return courses;
+        }
+    }
 }
