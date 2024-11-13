@@ -8,12 +8,12 @@ import { compare, SortEvent, SortingDirective } from '../../services/sorting.dir
 import { FormsModule } from '@angular/forms';
 import { SubjectsPipe } from '../../services/subjects.pipe';
 import { ScheduleService } from '../../services/schedule.service';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-courses',
     standalone: true,
-    imports: [CommonModule, SortingDirective, FormsModule, CoursePipe, SubjectsPipe, MatPaginatorModule],
+    imports: [CommonModule, SortingDirective, FormsModule, CoursePipe, SubjectsPipe],
     templateUrl: './courses.component.html',
     styleUrl: './courses.component.scss'
 })
@@ -28,9 +28,6 @@ export class CoursesComponent {
     coursesTotal: number = 0;
     filteredTotal: number = 0;
     courseAdded: string = "";
-    pageSize: number = 10;
-    currentPage: number = 0;
-    items = this.getData(this.currentPage, this.pageSize);
 
     @ViewChildren(SortingDirective)
     headers!: QueryList<SortingDirective>;
@@ -46,25 +43,6 @@ export class CoursesComponent {
         })
 
         this.subjectsList = this.subjectsService.getSubjects();
-
-         /*this.originalCourseList = this.courseService.getLocalCourses();
-        this.courseList = this.originalCourseList;
-        this.coursesTotal = this.courseList.length;
-
-        this.subjectsList = this.subjectsService.getLocalSubjects();*/
-    }
-
-    pageChanged(event: PageEvent) {
-        this.currentPage = event.pageIndex;
-        this.items = this.getData(this.currentPage, this.pageSize);
-    }
-
-    getData(page: number, size: number) {
-        let tempList: Course[] = [];
-        let start: number = page * size;
-        let end: number = start + size;
-        tempList = this.originalCourseList.slice(start, end)
-        this.courseList = tempList;
     }
 
     onSort({ column, direction }: SortEvent) {
