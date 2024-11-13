@@ -35,19 +35,13 @@ export class CoursesComponent {
     constructor(private courseService: CourseService, private subjectsService: SubjectsService, private scheduleService: ScheduleService) { }
 
     ngOnInit() {
-       this.courseService.getCourses().subscribe(data => {
+        this.courseService.getCourses().subscribe(data => {
             this.originalCourseList = data;
             this.courseList = this.originalCourseList;
             this.coursesTotal = this.courseList.length;
         })
 
         this.subjectsList = this.subjectsService.getSubjects();
-
-         /*this.originalCourseList = this.courseService.getLocalCourses();
-        this.courseList = this.originalCourseList;
-        this.coursesTotal = this.courseList.length;
-
-        this.subjectsList = this.subjectsService.getLocalSubjects();*/
     }
 
     getData(page: number, size: number) {
